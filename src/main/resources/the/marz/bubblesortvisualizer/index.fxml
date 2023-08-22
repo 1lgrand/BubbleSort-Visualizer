@@ -9,7 +9,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="936.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="the.marz.bubblesortvisualizer.MainController">
    <children>
-      <Label alignment="CENTER" layoutX="113.0" layoutY="14.0" prefHeight="80.0" prefWidth="772.0" text="VISUALIZZAZIONE DEL BUBBLE SORT">
+      <Label alignment="CENTER" layoutX="82.0" layoutY="14.0" prefHeight="80.0" prefWidth="772.0" text="VISUALIZZAZIONE DEL BUBBLE SORT">
          <font>
             <Font name="Verdana Pro Cond Bold" size="38.0" />
          </font>
