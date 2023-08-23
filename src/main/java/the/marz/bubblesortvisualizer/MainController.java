@@ -6,7 +6,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
+
+import java.net.PasswordAuthentication;
 import java.util.Random;
 
 import java.net.URL;
@@ -22,57 +27,100 @@ public class MainController{
 
     Vector<Rectangle> vettoreRettangoli = new Vector<>();
 
+    Vector<Integer> numeriCasuali = new Vector<>();
+
     public void initialize() {
 
-        vettoreRettangoli.add(r1);
-        vettoreRettangoli.add(r2);
-        vettoreRettangoli.add(r3);
-        vettoreRettangoli.add(r4);
-        vettoreRettangoli.add(r5);
-        vettoreRettangoli.add(r6);
-        vettoreRettangoli.add(r7);
-        vettoreRettangoli.add(r8);
-        vettoreRettangoli.add(r9);
         vettoreRettangoli.add(r10);
+        vettoreRettangoli.add(r9);
+        vettoreRettangoli.add(r8);
+        vettoreRettangoli.add(r7);
+        vettoreRettangoli.add(r6);
+        vettoreRettangoli.add(r5);
+        vettoreRettangoli.add(r4);
+        vettoreRettangoli.add(r3);
+        vettoreRettangoli.add(r2);
+        vettoreRettangoli.add(r1);
+
 
     }
 
-
-    @FXML
-    private void swap(){
-        if (play.isVisible()){
-            stop.setVisible(true);
-            play.setVisible(false);
-        }else{
-            stop.setVisible(false);
-            play.setVisible(true);
-        }
-    }
 
     @FXML
     private void insertArray(){
 
     }
 
+
+
+
     @FXML
-    private void generateArray(){
-        initialize();
-        Vector<Integer> numeriCasuali = generateRandomIntegers(10,1,30);
-        int i;
+    private void startSimulation(){
 
-        System.out.println(numeriCasuali);
+        int i,j,tmp;
 
+        
 
-        for (i=0;i<10;i++){
+        for (i = 0; i<numeriCasuali.size();i++){
 
-            Integer randHeight= numeriCasuali.elementAt(i) * 10;
-            System.out.println(randHeight);
+            vettoreRettangoli.elementAt(i).setFill(Color.RED);
 
-            vettoreRettangoli.elementAt(i).setHeight(randHeight);
-            System.out.println(vettoreRettangoli.elementAt(i).getHeight());
+            for(j=1; j < (numeriCasuali.size()-i); j++){
+                vettoreRettangoli.elementAt(j).setFill(Color.GREEN);
+                if(numeriCasuali.elementAt(j-1) > numeriCasuali.elementAt(i)){
+                    SwapRettangoli(vettoreRettangoli.elementAt(i),vettoreRettangoli.elementAt(j-1));
 
+                    tmp = numeriCasuali.elementAt(j-1);
+                    numeriCasuali.set(j-1,tmp);
+                    numeriCasuali.set(j,tmp);
+
+                }
+            }
         }
 
+
+    }
+
+
+
+    @FXML
+    private void SwapRettangoli(Rectangle i,Rectangle j){
+
+        //Animazione
+        TranslateTransition index_i = new TranslateTransition();
+        TranslateTransition index_j = new TranslateTransition();
+
+        double riX = i.getX();
+        double rjX = j.getX();
+
+        index_i.setNode(i);
+        index_j.setNode(j);
+
+        index_i.setDuration(Duration.millis(2000));
+        index_j.setDuration(Duration.millis(2000));
+
+        index_i.setByX(rjX);
+        index_j.setByX(riX);;
+
+        index_i.play();
+        index_i.play();
+
+
+    }
+
+
+    @FXML
+    private void generateArray() {
+        initialize();
+        numeriCasuali = generateRandomIntegers(10, 1, 30);
+
+        for (int i = 0; i < 10; i++) {
+            Integer randHeight = numeriCasuali.elementAt(i);
+
+            vettoreRettangoli.elementAt(i).setHeight(randHeight*10);
+
+            System.out.printf("Rettangolo [%d]: %d\n", i, numeriCasuali.elementAt(i)*10);
+        }
     }
 
 
@@ -84,6 +132,7 @@ public class MainController{
             Integer randomNumber = random.nextInt(max - min + 1) + min;
             listaNumeriCasuali.add(randomNumber);
         }
+
 
         return listaNumeriCasuali;
     }
