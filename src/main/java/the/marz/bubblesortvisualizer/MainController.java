@@ -59,6 +59,8 @@ public class MainController{
 
         int i,j,tmp;
 
+
+        SwapRettangoli(vettoreRettangoli.elementAt(1),vettoreRettangoli.elementAt(1));
         
 
         for (i = 0; i<numeriCasuali.size();i++){
@@ -68,7 +70,7 @@ public class MainController{
             for(j=1; j < (numeriCasuali.size()-i); j++){
                 vettoreRettangoli.elementAt(j).setFill(Color.GREEN);
                 if(numeriCasuali.elementAt(j-1) > numeriCasuali.elementAt(i)){
-                    SwapRettangoli(vettoreRettangoli.elementAt(i),vettoreRettangoli.elementAt(j-1));
+
 
                     tmp = numeriCasuali.elementAt(j-1);
                     numeriCasuali.set(j-1,tmp);
@@ -90,20 +92,20 @@ public class MainController{
         TranslateTransition index_i = new TranslateTransition();
         TranslateTransition index_j = new TranslateTransition();
 
-        double riX = i.getX();
-        double rjX = j.getX();
+        double riX = i.getLayoutX()*-1;
+        double rjX = j.getLayoutX()*-1;
 
         index_i.setNode(i);
-        index_j.setNode(j);
+        //index_j.setNode(j);
 
-        index_i.setDuration(Duration.millis(2000));
-        index_j.setDuration(Duration.millis(2000));
+        index_i.setDuration(Duration.millis(1000));
+        //index_j.setDuration(Duration.millis(100));
 
         index_i.setByX(rjX);
-        index_j.setByX(riX);;
+        //index_j.setByX(riX);;
 
         index_i.play();
-        index_i.play();
+        //index_j.play();
 
 
     }
